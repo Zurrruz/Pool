@@ -122,6 +122,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &319435299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 319435301}
+  - component: {fileID: 319435300}
+  m_Layer: 0
+  m_Name: LifeTimer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &319435300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319435299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc5680c4d7a3f046935bbdcf50b5ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minValue: 2
+  _maxValue: 5
+--- !u!4 &319435301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319435299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5004476, y: 3.553216, z: 2.4170527}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &604970586
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,12 +284,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 604970586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc5680c4d7a3f046935bbdcf50b5ef1, type: 3}
+  m_Script: {fileID: 11500000, guid: 47c94f5d8d784754eb2c4e6dc4d1c8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 911083433}
-  _minValue: 2
-  _maxValue: 5
+  _lifeTimer: {fileID: 319435300}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e69ad88f164b1a4eadea32fbc0dd0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 8937839798504407859, guid: d510677b9a819cd4982fae1ba5941fa2, type: 3}
+  _prefab: {fileID: -5738777165597877558, guid: d510677b9a819cd4982fae1ba5941fa2, type: 3}
+  _lifeTimer: {fileID: 319435300}
   _repeatRate: 1
   _poolCapacity: 5
   _poolMaxSize: 5
@@ -599,12 +644,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1578078170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc5680c4d7a3f046935bbdcf50b5ef1, type: 3}
+  m_Script: {fileID: 11500000, guid: 47c94f5d8d784754eb2c4e6dc4d1c8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 911083433}
-  _minValue: 2
-  _maxValue: 5
+  _lifeTimer: {fileID: 319435300}
 --- !u!1 &1967211933
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +661,6 @@ GameObject:
   - component: {fileID: 1967211935}
   - component: {fileID: 1967211934}
   - component: {fileID: 1967211938}
-  - component: {fileID: 1967211939}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Plane
@@ -720,35 +762,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967211933}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e69ad88f164b1a4eadea32fbc0dd0a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefab: {fileID: 8937839798504407859, guid: d510677b9a819cd4982fae1ba5941fa2, type: 3}
-  _repeatRate: 1
-  _poolCapacity: 5
-  _poolMaxSize: 5
-  _startPointPositionY: 10
-  _minStartPointPositionX: -3
-  _maxStartPointPositionX: 3
-  _minStartPointPositionZ: -3
-  _maxStartPointPositionZ: 3
---- !u!114 &1967211939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967211933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc5680c4d7a3f046935bbdcf50b5ef1, type: 3}
+  m_Script: {fileID: 11500000, guid: 47c94f5d8d784754eb2c4e6dc4d1c8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 911083433}
-  _minValue: 2
-  _maxValue: 5
+  _lifeTimer: {fileID: 319435300}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -759,3 +778,4 @@ SceneRoots:
   - {fileID: 604970590}
   - {fileID: 1578078174}
   - {fileID: 911083434}
+  - {fileID: 319435301}
