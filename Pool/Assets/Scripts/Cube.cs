@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ManagerObject : MonoBehaviour
+public class Cube : MonoBehaviour
 {
     [SerializeField] private Coloration _colorScheme;
 

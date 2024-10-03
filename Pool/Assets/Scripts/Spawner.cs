@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private ManagerObject _prefab;
+    [SerializeField] private Cube _prefab;
     [SerializeField] private LifeTimer _lifeTimer;
 
     [SerializeField] private float _repeatRate = 1f;
@@ -17,14 +17,14 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _minStartPointPositionZ;
     [SerializeField] private float _maxStartPointPositionZ;    
 
-    private ObjectPool<ManagerObject> _pool;
+    private ObjectPool<Cube> _pool;
 
     private void Awake()
     {
-        _pool = new ObjectPool<ManagerObject>(
+        _pool = new ObjectPool<Cube>(
             createFunc: () => Instantiate(_prefab),
             actionOnGet: (obj) => LaunchesObject(obj),
-            actionOnDestroy: (obj) => Destroy(obj),
+            actionOnDestroy: (obj) => Destroy(obj.gameObject),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);        
@@ -37,15 +37,15 @@ public class Spawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _lifeTimer.TimeOver += PoolRelease;
+        _lifeTimer.TimeOver += ReturnBackPool;
     }
 
     private void OnDisable()
     {
-        _lifeTimer.TimeOver -= PoolRelease;
+        _lifeTimer.TimeOver -= ReturnBackPool;
     }
 
-    public void PoolRelease(ManagerObject obj)
+    public void ReturnBackPool(Cube obj)
     {
         obj.ResetParameters();
         _pool.Release(obj);
@@ -65,7 +65,7 @@ public class Spawner : MonoBehaviour
         _pool.Get();
     }
 
-    private void LaunchesObject(ManagerObject obj)
+    private void LaunchesObject(Cube obj)
     {
         float randomPositionX = Random.Range(_minStartPointPositionX, _maxStartPointPositionX);
         float randomPositionZ = Random.Range(_minStartPointPositionZ, _maxStartPointPositionZ);

@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class CollisionDetector : MonoBehaviour
 {
-    [SerializeField] private LifeTimer _lifeTimer;
+    [SerializeField] private Cube _cube;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out ManagerObject managerObject))
+        if (collision.gameObject.TryGetComponent(out Plane plane))
         {
-            if (managerObject.CanTouch)
+            if (_cube.CanTouch)
             {
-                managerObject.PaintRandom();
-                managerObject.PreventTimerStarted();
-                _lifeTimer.Run(managerObject);
+                _cube.PaintRandom();
+                _cube.PreventTimerStarted();
+
+                plane.StartTimer(_cube);
             }
         }
     }
