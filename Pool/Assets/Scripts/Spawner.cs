@@ -5,7 +5,6 @@ using UnityEngine.Pool;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private Cube _prefab;
-    [SerializeField] private LifeTimer _lifeTimer;
 
     [SerializeField] private float _repeatRate = 1f;
     [SerializeField] private int _poolCapacity = 5;
@@ -35,19 +34,11 @@ public class Spawner : MonoBehaviour
         StartCoroutine(StartRainCubes());
     }
 
-    private void OnEnable()
-    {
-        _lifeTimer.TimeOver += ReturnBackPool;
-    }
-
-    private void OnDisable()
-    {
-        _lifeTimer.TimeOver -= ReturnBackPool;
-    }
-
     public void ReturnBackPool(Cube obj)
     {
         obj.ResetParameters();
+        obj.TimeOver -= ReturnBackPool;
+
         _pool.Release(obj);
     }
 
@@ -72,5 +63,7 @@ public class Spawner : MonoBehaviour
 
         obj.transform.position = new Vector3(randomPositionX, _startPointPositionY, randomPositionZ);
         obj.gameObject.SetActive(true);
+
+        obj.TimeOver += ReturnBackPool;
     }
 }
