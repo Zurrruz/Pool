@@ -4,6 +4,7 @@ using UnityEngine;
 public class Coloration : MonoBehaviour
 {
     [SerializeField] private Color _default;
+
     private Renderer _renderer;
 
     private void Awake()

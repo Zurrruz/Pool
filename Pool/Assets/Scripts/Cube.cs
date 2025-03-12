@@ -1,16 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Cube : MonoBehaviour
+public class Cube : Shape
 {
     [SerializeField] private Coloration _colorScheme;
     [SerializeField] private DetectorPlanform _detectorPlanform;
-
-    [SerializeField] private int _minLifeTime;
-    [SerializeField] private int _maxLifeTime;
-
-    public event UnityAction<Cube> TimeOver;
 
     public bool CanTouch { get; private set; } = true;
 
@@ -18,16 +11,15 @@ public class Cube : MonoBehaviour
     {
         _detectorPlanform.CollisionHappened += EstablishNewParameters;
     }
+
     private void OnDisable()
     {
         _detectorPlanform.CollisionHappened -= EstablishNewParameters;
     }
 
-    public void ResetParameters()
+    public override void ResetParameters()
     {
         _colorScheme.Reset();
-
-        gameObject.SetActive(false);
 
         CanTouch = true;
     }
@@ -40,15 +32,6 @@ public class Cube : MonoBehaviour
             PreventTimerStarted();
             StartCoroutine(StartTimer());
         }
-    }
-
-    private IEnumerator StartTimer()
-    {
-        int time = Random.Range(_minLifeTime, _maxLifeTime);
-
-        yield return new WaitForSeconds(time);
-
-        TimeOver?.Invoke(this);
     }
 
     private void PreventTimerStarted()
