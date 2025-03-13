@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
-public class Coloration : MonoBehaviour
+public class ColorChanger : MonoBehaviour
 {
     [SerializeField] private Color _default;
 

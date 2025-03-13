@@ -10,7 +10,7 @@ public class Bomb : Shape
 
     private void OnEnable()
     {
-        StartCoroutine(StartTimer());
+        StartCoroutine(LifeTimer());
         StartFade();
     }
 
@@ -40,6 +40,6 @@ public class Bomb : Shape
 
     private void StartFade()
     {
-        _fadeOutBomb.Vanish(_lifeTime);
+        _fadeOutBomb.Vanish(LifeTime);
     }
 }

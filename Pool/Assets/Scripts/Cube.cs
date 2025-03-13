@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Cube : Shape
 {
-    [SerializeField] private Coloration _colorScheme;
+    [SerializeField] private ColorChanger _cubeColorChanger;
     [SerializeField] private DetectorPlanform _detectorPlanform;
 
     public bool CanTouch { get; private set; } = true;
@@ -19,7 +19,7 @@ public class Cube : Shape
 
     public override void ResetParameters()
     {
-        _colorScheme.Reset();
+        _cubeColorChanger.Reset();
 
         CanTouch = true;
     }
@@ -30,7 +30,7 @@ public class Cube : Shape
         {
             PaintRandom();
             PreventTimerStarted();
-            StartCoroutine(StartTimer());
+            StartCoroutine(LifeTimer());
         }
     }
 
@@ -41,6 +41,6 @@ public class Cube : Shape
 
     private void PaintRandom()
     {
-        _colorScheme.PaintRandom();
+        _cubeColorChanger.PaintRandom();
     }
 }

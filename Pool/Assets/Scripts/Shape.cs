@@ -9,19 +9,19 @@ public abstract class Shape : MonoBehaviour
 
     private WaitForSeconds _time;
 
-    protected int _lifeTime;
+    protected int LifeTime;
 
     public event UnityAction<Shape> TimeOver;
 
     private void Awake()
     {
-        _lifeTime = Random.Range(_minLifeTime, _maxLifeTime);
-        _time = new WaitForSeconds(_lifeTime);
+        LifeTime = Random.Range(_minLifeTime, _maxLifeTime + 1);
+        _time = new WaitForSeconds(LifeTime);
     }
 
     public abstract void ResetParameters();
 
-    protected IEnumerator StartTimer()
+    protected IEnumerator LifeTimer()
     {
         yield return _time;
 
