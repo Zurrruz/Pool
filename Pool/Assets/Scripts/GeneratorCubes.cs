@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class GeneratorCubes : GeneratorShape<Shape> 
+public class GeneratorCubes : GeneratorShape 
 {
     [SerializeField] private float _spawnInterval = 1f;
     [SerializeField] private Vector3 _spawnArea;
@@ -26,12 +26,7 @@ public class GeneratorCubes : GeneratorShape<Shape>
     {
         while (enabled)
         {
-            Shape cube = GetPooledObject();
-            cube.transform.position = GetRandomPosition();
-            cube.gameObject.SetActive(true);
-            cube.ResetParameters();
-
-            cube.TimeOver += ReturnPool;
+            SpawnObject(GetRandomPosition());
 
             yield return _delay;
         }
@@ -46,11 +41,9 @@ public class GeneratorCubes : GeneratorShape<Shape>
         );
     }
 
-    protected override void ReturnPool(Shape cube)
+    protected override void EndLifecycleObject(Shape cube)
     {
-        base.ReturnPool(cube);
-
-        cube.TimeOver -= ReturnPool;
+        base.EndLifecycleObject(cube);
 
         ReturnedCube?.Invoke(cube.transform);
     }

@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneratorShape<T> : MonoBehaviour where T : Shape
+public class GeneratorShape : MonoBehaviour
 {
-    [SerializeField] private T _prefab;
+    [SerializeField] private Shape _prefab;
 
-    private Queue<T> _pool;
+    private Pool<Shape> _pool;
 
     private int _totalCreated = 0;
     private int _totalSpawned = 0;
@@ -18,34 +17,42 @@ public class GeneratorShape<T> : MonoBehaviour where T : Shape
 
     protected virtual void Awake()
     {
-        _pool = new Queue<T>();
+        _pool = new Pool<Shape>(createFunc: () => Instantiate(_prefab, transform));
     }
 
-    protected virtual void ReturnPool(T obj)
+    protected virtual void EndLifecycleObject(Shape obj) 
     {
+        obj.OnLifeEnd();
+    }
+
+    private void ReturnPool(Shape obj)
+    {
+        EndLifecycleObject(obj);
+        
         obj.gameObject.SetActive(false);
-        _pool.Enqueue(obj);
+        obj.TimeOver -= ReturnPool;
+
+        _pool.ReturnPool(obj);
 
         _activeObjects--;
         ShapeActivated?.Invoke(_activeObjects);
     }
 
-    protected T GetPooledObject()
+    protected void SpawnObject(Vector3 position)
     {
+        Shape obj = _pool.Get();
+        
+        obj.transform.position = position;
+        obj.gameObject.SetActive(true);
+        obj.TimeOver += ReturnPool;
+
         _totalSpawned++;
         ShapeSpawned?.Invoke(_totalSpawned);
 
         _activeObjects++;
         ShapeActivated?.Invoke(_activeObjects);
 
-        if (_pool.Count > 0)
-            return _pool.Dequeue();
-
-        T obj = Instantiate(_prefab, transform);       
-
-        _totalCreated++;
+        _totalCreated = _pool.CountCreated;
         ShapeCreated?.Invoke(_totalCreated);
-
-        return obj;
     }
 }

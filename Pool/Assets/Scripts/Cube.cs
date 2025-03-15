@@ -17,7 +17,12 @@ public class Cube : Shape
         _detectorPlanform.CollisionHappened -= EstablishNewParameters;
     }
 
-    public override void ResetParameters()
+    public override void OnLifeEnd()
+    {
+        ResetParameters();
+    }
+
+    private  void ResetParameters()
     {
         _cubeColorChanger.Reset();
 

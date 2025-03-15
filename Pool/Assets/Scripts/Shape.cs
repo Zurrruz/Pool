@@ -11,15 +11,15 @@ public abstract class Shape : MonoBehaviour
 
     protected int LifeTime;
 
-    public event UnityAction<Shape> TimeOver;
+    public event UnityAction<Shape> TimeOver ;
+
+    public abstract void OnLifeEnd();
 
     private void Awake()
     {
         LifeTime = Random.Range(_minLifeTime, _maxLifeTime + 1);
         _time = new WaitForSeconds(LifeTime);
     }
-
-    public abstract void ResetParameters();
 
     protected IEnumerator LifeTimer()
     {

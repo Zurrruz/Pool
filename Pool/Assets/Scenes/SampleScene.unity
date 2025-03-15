@@ -2050,7 +2050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1571718150
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2089,7 +2089,6 @@ MonoBehaviour:
   _totalCreateText: {fileID: 345348371}
   _totalSpawnText: {fileID: 531388242}
   _activeObjectsText: {fileID: 960030255}
-  _generatorShape: {fileID: 189665562}
 --- !u!1 &1578078170
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,7 +2526,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1851139341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e3033f3b9da5044b78554a92eeb19e, type: 3}
+  m_Script: {fileID: 11500000, guid: bb94b7872934bac42aeedbb823869c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _totalCreateText: {fileID: 1411381160}

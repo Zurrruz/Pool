@@ -14,7 +14,7 @@ public class Bomb : Shape
         StartFade();
     }
 
-    public override void ResetParameters()
+    public override void OnLifeEnd()
     {
         Explode();
     }
@@ -41,5 +41,5 @@ public class Bomb : Shape
     private void StartFade()
     {
         _fadeOutBomb.Vanish(LifeTime);
-    }
+    }    
 }
